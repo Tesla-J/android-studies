@@ -6,8 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
     private TextView mTextView;
+    private boolean mAllCaps;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,12 +16,14 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mTextView = (TextView) findViewById(R.id.hello_message);
+        mAllCaps = true;
 
-        mTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mTextView.setAllCaps(true);
-            }
-        });
+        mTextView.setOnClickListener(this::onClick);
+    }
+
+    @Override
+    public void onClick(View v){
+        mTextView.setAllCaps(mAllCaps);
+        mAllCaps = !mAllCaps;
     }
 }
